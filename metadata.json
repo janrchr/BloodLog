@@ -1,0 +1,5 @@
+{
+  "name": "Blodsukker Log Assistent",
+  "description": "A professional blood sugar tracking application with AI-powered health insights, statistical monitoring, and complete data privacy via local storage.",
+  "requestFramePermissions": []
+}
