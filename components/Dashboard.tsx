@@ -54,56 +54,56 @@ const Dashboard: React.FC<DashboardProps> = ({ entries, t }) => {
     <div className="space-y-6">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <h2 className="text-2xl font-bold text-slate-800">{t.dashboard}</h2>
-        <div className="flex bg-white rounded-lg p-1 shadow-sm border border-slate-200">
+        <div className="flex bg-white rounded-lg p-1 shadow-sm border border-slate-200 overflow-x-auto no-scrollbar">
           <button 
             onClick={() => setRange('14d')}
-            className={`px-4 py-1.5 rounded-md text-sm transition-colors ${range === '14d' ? 'bg-blue-600 text-white shadow-sm' : 'hover:bg-slate-50'}`}
+            className={`whitespace-nowrap px-3 sm:px-4 py-1.5 rounded-md text-xs sm:text-sm transition-colors ${range === '14d' ? 'bg-blue-600 text-white shadow-sm' : 'hover:bg-slate-50'}`}
           >
             {t.last14Days}
           </button>
           <button 
             onClick={() => setRange('1m')}
-            className={`px-4 py-1.5 rounded-md text-sm transition-colors ${range === '1m' ? 'bg-blue-600 text-white shadow-sm' : 'hover:bg-slate-50'}`}
+            className={`whitespace-nowrap px-3 sm:px-4 py-1.5 rounded-md text-xs sm:text-sm transition-colors ${range === '1m' ? 'bg-blue-600 text-white shadow-sm' : 'hover:bg-slate-50'}`}
           >
             {t.lastMonth}
           </button>
           <button 
             onClick={() => setRange('3m')}
-            className={`px-4 py-1.5 rounded-md text-sm transition-colors ${range === '3m' ? 'bg-blue-600 text-white shadow-sm' : 'hover:bg-slate-50'}`}
+            className={`whitespace-nowrap px-3 sm:px-4 py-1.5 rounded-md text-xs sm:text-sm transition-colors ${range === '3m' ? 'bg-blue-600 text-white shadow-sm' : 'hover:bg-slate-50'}`}
           >
             {t.last3Months}
           </button>
         </div>
       </header>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-          <p className="text-slate-500 text-sm font-medium mb-1">{t.average}</p>
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-blue-600">{stats?.avg}</span>
-            <span className="text-slate-400 text-xs">{t.units}</span>
+      {/* Stats Cards - Forced Horizontal (3 columns) */}
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="bg-white p-3 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-slate-200">
+          <p className="text-slate-500 text-[10px] sm:text-sm font-medium mb-1 truncate">{t.average}</p>
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-0 sm:gap-2">
+            <span className="text-xl sm:text-3xl font-bold text-blue-600">{stats?.avg}</span>
+            <span className="text-slate-400 text-[8px] sm:text-xs uppercase">{t.units.split('/')[0]}</span>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-          <p className="text-slate-500 text-sm font-medium mb-1">{t.highest}</p>
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-red-500">{stats?.max}</span>
-            <span className="text-slate-400 text-xs">{t.units}</span>
+        <div className="bg-white p-3 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-slate-200">
+          <p className="text-slate-500 text-[10px] sm:text-sm font-medium mb-1 truncate">{t.highest}</p>
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-0 sm:gap-2">
+            <span className="text-xl sm:text-3xl font-bold text-red-500">{stats?.max}</span>
+            <span className="text-slate-400 text-[8px] sm:text-xs uppercase">{t.units.split('/')[0]}</span>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-          <p className="text-slate-500 text-sm font-medium mb-1">{t.lowest}</p>
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-emerald-500">{stats?.min}</span>
-            <span className="text-slate-400 text-xs">{t.units}</span>
+        <div className="bg-white p-3 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-slate-200">
+          <p className="text-slate-500 text-[10px] sm:text-sm font-medium mb-1 truncate">{t.lowest}</p>
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-0 sm:gap-2">
+            <span className="text-xl sm:text-3xl font-bold text-emerald-500">{stats?.min}</span>
+            <span className="text-slate-400 text-[8px] sm:text-xs uppercase">{t.units.split('/')[0]}</span>
           </div>
         </div>
       </div>
 
       {/* Chart */}
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-        <div className="h-80 w-full">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+        <div className="h-64 sm:h-80 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={filteredData}>
               <defs>
@@ -117,17 +117,17 @@ const Dashboard: React.FC<DashboardProps> = ({ entries, t }) => {
                 dataKey="time" 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{fontSize: 12, fill: '#94a3b8'}}
-                minTickGap={30}
+                tick={{fontSize: 10, fill: '#94a3b8'}}
+                minTickGap={20}
               />
               <YAxis 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{fontSize: 12, fill: '#94a3b8'}}
+                tick={{fontSize: 10, fill: '#94a3b8'}}
                 domain={[0, 'auto']}
               />
               <Tooltip 
-                contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
+                contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', fontSize: '12px' }}
                 labelClassName="font-semibold text-slate-800 mb-1"
                 formatter={(value: number) => [`${value} ${t.units}`, 'Blodsukker']}
               />
